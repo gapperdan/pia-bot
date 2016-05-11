@@ -18,6 +18,33 @@ controller.hears(['marco'], 'direct_message,direct_mention,mention', function(bo
     bot.reply(message, 'polo');
 });
 
+controller.hears(['rest'], 'direct_message,direct_mention,mention', function(bot, message) {
+  var http = require('http');
+
+  var options = {
+    host: 'www.random.org',
+    path: '/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'
+  };
+
+  callback = function(response) {
+    var str = '';
+
+    //another chunk of data has been recieved, so append it to `str`
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+
+    //the whole response has been recieved, so we just print it out here
+    response.on('end', function () {
+      console.log(str);
+    });
+  }
+
+  http.request(options, callback).end();
+
+  bot.reply(message, 'testing');
+});
+
 controller.hears(['hello'], 'direct_message,direct_mention,mention', function(bot, message) {
 
     bot.api.reactions.add({
