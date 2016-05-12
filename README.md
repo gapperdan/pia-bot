@@ -15,3 +15,8 @@ To test, send a direct message to the bot you created in slack. For example, if 
 /msg @pia marco
 ```
 Or invite your bot to a channel, then converse normally.
+
+## Using with wit.ai app
+```
+wit=<wit-app-server-token> token=<your-slack-token> node pia_slack_bot.js
+```
